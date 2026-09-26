@@ -61,7 +61,7 @@ python --version
 
 ### 본편 기준 롬
 
-본편 패치는 **북미판(USA) UNDUB 원본 ROM에 `SMT4Final 2.0`의 RomFS 패치 파일을 적용한 ROM**을 기준으로 제작되었습니다. 이후 HackingToolkit3DS로 해당 기준 ROM을 추출한 결과가 `Extracted_Base`의 기준 파일이 됩니다.
+본편 패치는 **북미판(USA) UNDUB 원본 ROM에 기존 팀프로스트 제작 한글패치 2.0 버전 `SMT4Final 2.0`의 RomFS 패치 파일을 적용한 ROM**을 기준으로 제작되었습니다. 이후 HackingToolkit3DS로 해당 기준 ROM을 추출한 결과가 `Extracted_Base`의 기준 파일이 됩니다.
 
 기준 ROM 파일 예시는 다음과 같습니다.
 
