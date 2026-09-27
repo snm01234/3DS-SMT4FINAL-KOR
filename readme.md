@@ -1,4 +1,4 @@
-# 진 여신전생 IV FINAL 한국어 추가 패치 v1.0.0
+진 여신전생 IV FINAL 한국어 추가 패치 v1.0.0
 
 이 문서는 GitHub 배포 파일 세 가지의 **적용 대상, 한글화 범위, 설치 순서**를 설명합니다. 먼저 아래 표에서 본인의 게임 구동 방식을 고르세요.
 
@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | `SMT4F_KO_FOR_REPACK_v1.0.0.zip` | 본편 게임을 직접 추출하여 다시 빌드할 때 | 재빌드에 넣을 본편 변경 파일 623개 |
 | `SMT4F_KO_LayeredFS_Luma_v1.0.0.zip` | Luma3DS의 게임 패칭으로 본편을 실행할 때 | SD 카드에 복사할 본편 변경 파일 623개 |
-| `SMT4F_KO_DLC_Patch_v1.0.0.zip` | 별도로 보유한 DLC를 추출해 패치할 때 | 패치된 DLC 추출 폴더. 설치용 CIA는 별도로 빌드해야 함 |
+| `SMT4F_KO_DLC_Patch_v1.0.0.zip` | 별도로 보유한 DLC를 추출해 한국어 CIA를 만들 때 | 변경 파일 37개와 `BUILD_DLC_CIA.bat`로 설치용 DLC CIA 생성 |
 
 **본편은 앞의 두 ZIP 중 하나만 선택**합니다. 둘은 같은 본편 변경분을 재빌드용과 Luma3DS용으로 포장한 것입니다. DLC를 사용하고 한글화하려면 세 번째 ZIP을 추가로 사용합니다. 본편 패치가 DLC를 자동으로 수정하지는 않습니다.
 
@@ -21,13 +21,13 @@
 
 본편 배포물의 파일 기준 변경량은 **기존 파일 수정 622개 + 새 파일 1개 = 623개**입니다. 파일 수는 번역된 문장 수나 한글화율을 뜻하지 않습니다. 모든 게임 화면과 모든 미사용 문자열이 한국어라고 보장하는 수치도 아닙니다.
 
-DLC ZIP은 **DLC 추출본의 37개 파일**을 수정합니다. DLC 콘텐츠의 대사·퀘스트·아이템 관련 텍스트와 오역·용어를 보강하며, 변경 대상에는 `DecryptedApp.*`, 매뉴얼·다운로드 플레이용 파일과 그 추출 테이블이 포함됩니다. DLC의 모든 파일을 바꾸는 패치는 아니며, **본편용 ZIP만 설치하면 DLC 변경분은 적용되지 않습니다.**
+DLC ZIP은 **DLC용 변경 파일 37개**를 담고 있습니다. DLC 콘텐츠의 대사·퀘스트·아이템 관련 텍스트와 오역·용어를 보강하며, 변경 대상에는 `DecryptedApp.*`, 매뉴얼·다운로드 플레이용 파일과 그 추출 테이블이 포함됩니다. ZIP의 빌드 스크립트는 필요한 변경 파일과 원본 추출 파일을 골라 CIA로 묶습니다. DLC의 모든 파일을 바꾸는 패치는 아니며, **본편용 ZIP만 설치하면 DLC 변경분은 적용되지 않습니다.**
 
 ## 시작 전 준비
 
 1. 본인이 보유한 게임과 DLC에서 직접 준비한 파일을 사용하세요. 세 ZIP은 완성된 본편 `.3ds`나 DLC `.cia`가 아닙니다.
 2. 기존 Team Frost 2.0 패치와 자신의 추출 폴더 또는 SD 카드 내용을 **별도 위치에 백업**하세요. 재빌드 방식이라면 원본 추출 폴더도 보존하세요.
-3. 세 ZIP을 각각 압축 해제하세요. Windows 탐색기의 **모두 압축 풀기**를 사용해도 됩니다. 압축을 풀면 ZIP 내부의 최상위 폴더 이름을 아래 예시와 비교하세요.
+3. 본편용 ZIP 하나를 선택해 압축 해제하고, DLC를 사용할 경우 DLC ZIP도 압축 해제하세요. Windows 탐색기의 **모두 압축 풀기**를 사용해도 됩니다. 압축을 풀면 ZIP 내부의 최상위 폴더 이름을 아래 예시와 비교하세요.
 4. 본편 게임의 지역·UNDUB 구성·Team Frost 2.0 버전이 기준과 다르면 화면이 달라지거나 실행되지 않을 수 있습니다. 특히 다른 지역판에 같은 파일을 무작정 덮어쓰지 마세요.
 
 ### 본편 기준에 관하여
@@ -76,9 +76,9 @@ V9가 추출한 `DecryptedRomFS.bin`과 새로 생성되는 `CustomRomFS.bin`은
 
 1. 앞의 Decryptor로 만든 DLC `.cia`의 해시가 위 DLC 기준과 일치하는지 먼저 확인합니다.
 2. DLC CIA의 **복사본**을 별도의 HackingToolkit3DS 작업 폴더에 두고, `HackingToolkit3DS.exe`의 **`CE` (`.cia` 추출)**를 선택합니다. 파일명 입력에는 `.cia` 확장자를 뺀 이름만 입력합니다. `code.bin` 압축 해제 질문이 나오면 앞서 선택한 값을 기록합니다.
-3. 추출 후 `DecryptedApp.0003.00000003` 같은 콘텐츠 파일들, `DecryptedManual.bin`, `DecryptedDownloadPlay.bin`, `ExtractedManual/`, `ExtractedDownloadPlay/`가 생성되었는지 확인하고 작업 폴더 전체를 `ExtractedDLC_Base/`로 보존합니다. 그런 다음 아래 방법 C의 `--check`로 실제 패치 기준과 일치하는지 검사합니다.
+3. 추출 후 `DecryptedApp.0003.00000003` 같은 콘텐츠 파일들, `DecryptedManual.bin`, `DecryptedDownloadPlay.bin`, `HeaderNCCH1.bin`, `HeaderNCCH2.bin`, `ExtractedManual/`, `ExtractedDownloadPlay/`가 생성되었는지 확인하고 작업 폴더 전체를 `ExtractedDLC_Base/`로 보존합니다. 아래 방법 C의 빌드 스크립트가 필요한 기준 파일의 SHA-256을 검사합니다.
 
-**이 프로젝트에서 확인한 DLC 흐름:** 복호화된 기준 DLC CIA는 HackingToolkit3DS의 `CE`로 실제 추출할 수 있습니다. 추출 결과에서 위 파일들과 `HeaderNCCH1.bin`, `HeaderNCCH2.bin`을 확인하세요. CIA 재빌드는 HackingToolkit3DS의 `CR` 대신 별도 `SMT4F_KO_DLC_Patch_v1.0.0.zip`에 든 `tools/`와 `BUILD_DLC_CIA.bat`를 사용합니다. HackingToolkit3DS V9의 일반 설명에는 DLC 지원 제한이 적혀 있지만, 여기서는 **`CE` 추출 가능 여부와 `CR` 재빌드 지원 여부를 구분**해야 합니다. DLC Python 패치의 `--check`가 실패하면 기준 파일 차이도 함께 확인하세요.
+**이 프로젝트에서 확인한 DLC 흐름:** 복호화된 기준 DLC CIA는 HackingToolkit3DS의 `CE`로 추출할 수 있습니다. CIA 재빌드는 HackingToolkit3DS의 `CR` 대신 `SMT4F_KO_DLC_Patch_v1.0.0.zip`에 든 `tools/`와 `BUILD_DLC_CIA.bat`를 사용합니다. HackingToolkit3DS V9의 일반 설명에는 DLC 지원 제한이 적혀 있지만, 여기서는 **`CE` 추출 가능 여부와 `CR` 재빌드 지원 여부를 구분**해야 합니다.
 
 ## 사전 준비 2: Team Frost 2.0 본편 기준 만들기
 
@@ -164,11 +164,11 @@ SMT4F_KO_FOR_REPACK_v1.0.0/
 
 **되돌리기:** 백업한 Team Frost 2.0 폴더를 복원하고 이 추가 패치의 `exheader.bin`을 제거합니다. 기존 Team Frost 파일을 다시 덮어쓰는 것만으로 새로 추가된 파일이 자동 삭제되지는 않습니다.
 
-## 방법 C: DLC 추출본 패치하기 — `ExtractedDLC_PythonPatch`
+## 방법 C: DLC CIA 만들기 — `SMT4F_KO_DLC_Patch_v1.0.0.zip`
 
-**대상:** 별도로 보유한 북미판 DLC를 HackingToolkit3DS로 추출한 사용자. 본편을 A 또는 B 방식으로 설치한 뒤 필요한 경우 진행합니다. 이 ZIP에는 완성 DLC CIA가 들어 있지 않습니다.
+**대상:** 별도로 보유한 북미판 DLC를 HackingToolkit3DS의 `CE`로 추출한 사용자. 본편을 A 또는 B 방식으로 준비한 뒤 DLC가 필요하면 진행합니다. 이 ZIP은 한국어 변경 파일과 CIA 빌드 도구를 함께 제공하며, 완성된 DLC CIA는 포함하지 않습니다.
 
-### DLC 기준 파일
+### DLC 기준 파일과 ZIP 구성
 
 제작 기준은 아래 DLC 파일을 추출한 `ExtractedDLC_Base/`입니다. **본편과 달리 DLC에는 Team Frost 2.0 RomFS를 미리 적용하지 않습니다.**
 
@@ -177,54 +177,37 @@ Shin Megami Tensei IV - Apocalypse (USA) (DLC) decrypted.cia
 SHA-256: ee53472150a3bb58a43673ff85fc5d1658ccae9430d949f22673bf7d5dbdd201
 ```
 
-ZIP 내부에는 `APPLY_PATCH.bat`, `apply_patch.py`, `patch_data.zip`, `README_KO.txt`가 있습니다. 네 파일을 **같은 폴더에 둔 채** 사용하세요. Windows에서는 Python 3 설치가 필요합니다. 설치 후 명령 프롬프트에서 `py -3 --version`으로 확인할 수 있습니다. 별도 Python 패키지나 xdelta 실행 파일은 필요하지 않습니다.
+ZIP 안에는 `patch/`(변경 파일 37개), `rebuild/`(재빌드에 필요한 데이터), `tools/`(`3dstool.exe`, `makerom.exe`), `BUILD_DLC_CIA.bat`, `build_dlc_cia.ps1`, `MANIFEST_DLC.json`, `README_DLC_KO.txt`가 있습니다. **폴더와 파일의 상대 위치를 바꾸지 마세요.** 이 방법은 Windows와 PowerShell을 사용하며, Python은 필요하지 않습니다.
 
-### 적용 순서
+### 적용 및 CIA 빌드 순서
 
-1. 위 **사전 준비 1-3**에 따라 DLC CIA를 추출해 `ExtractedDLC_Base/` 폴더를 준비합니다. 예를 들어 그 안에 `DecryptedApp.0003.00000003`, `DecryptedManual.bin`, `ExtractedManual/` 등이 있어야 합니다. 기준 폴더는 백업하고 수정하지 않습니다.
-2. 압축 해제한 DLC 패치 폴더에서 `APPLY_PATCH.bat`를 실행합니다.
-3. `Baseline folder:`에는 **기준 추출 폴더**의 전체 경로를 입력합니다. 예: `D:\Games\ExtractedDLC_Base`.
-4. `Output folder:`에는 **새로 만들 결과 폴더**의 전체 경로를 입력합니다. 예: `D:\Games\ExtractedDLC`. 같은 드라이브에 두고, 아직 존재하지 않는 경로를 쓰는 것이 편합니다. 그냥 Enter를 누르면 기준 폴더 옆의 `ExtractedDLC`를 제안합니다.
-5. 패처가 37개 대상의 크기·SHA-256을 검사하고, 기준 폴더 전체를 결과 폴더로 복사한 뒤 델타를 적용합니다. 마지막에 다음 문구가 나와야 성공입니다.
+1. 위 **사전 준비 1-3**에 따라 복호화된 DLC CIA를 `CE`로 추출합니다. 결과를 `ExtractedDLC_Base/`로 보존하고 `DecryptedApp.0003.00000003`부터 `DecryptedApp.0020.00000020`까지의 DLC 콘텐츠 파일, `DecryptedManual.bin`, `DecryptedDownloadPlay.bin`, `HeaderNCCH1.bin`, `HeaderNCCH2.bin`이 있는지 확인합니다. 원본 추출 폴더는 수정하지 않습니다.
+2. `SMT4F_KO_DLC_Patch_v1.0.0.zip`을 압축 해제합니다. `BUILD_DLC_CIA.bat`를 실행합니다.
+3. **`원본 DLC 기준 폴더`** 질문에는 `HeaderNCCH1.bin`이 있는 `ExtractedDLC_Base/`의 전체 경로를 입력합니다. 예: `D:\Games\ExtractedDLC_Base`. 폴더를 패치 폴더 안이나 바로 위에 `ExtractedDLC_Base`라는 이름으로 뒀다면 Enter로 자동 검색할 수도 있습니다.
+4. **`결과 CIA를 저장할 out 폴더`** 질문에는 출력 폴더 경로를 입력합니다. Enter만 누르면 패치 폴더 안의 `out/`을 사용합니다. 결과 파일 이름은 `smt4a_dlc_ko.cia`입니다. 같은 이름의 결과 파일이 이미 있으면 덮어쓰지 않고 중단합니다.
+5. 스크립트가 `MANIFEST_DLC.json`을 기준으로 **원본 폴더에서 필요한 파일과 ZIP의 `patch/` 파일을 각각 SHA-256 검사**한 뒤 `3dstool`과 `makerom`으로 CIA를 생성합니다. 마지막에 `완료: <출력 CIA 경로>`가 표시되고 실제 CIA 파일이 만들어졌는지 확인하세요.
+6. 생성한 CIA를 본인의 3DS 또는 에뮬레이터 환경에 설치해 DLC 장면을 확인합니다. 이 결과 CIA는 개인 작업 결과물이며 배포 ZIP에 포함되지 않습니다.
 
-   ```text
-   Applied and verified 37/37 files
-   Patch complete: <결과 폴더 경로>
-   ```
-
-6. 결과 `ExtractedDLC/`는 **패치된 추출 파일 폴더**입니다. 이것만으로 DLC 설치가 끝나지 않습니다. DLC CIA까지 만들려면 아래의 별도 `SMT4F_KO_DLC_Patch_v1.0.0.zip` 절차를 따르세요.
-
-### DLC CIA 재빌드 — 별도 `SMT4F_KO_DLC_Patch_v1.0.0.zip`
-
-`dist`에 있는 이 ZIP은 위 세 가지 주요 배포 ZIP과 **별도 파일**입니다. 이 ZIP에는 DLC용 변경 파일 `patch/`, 재빌드 데이터 `rebuild/`, `tools/3dstool.exe`, `tools/makerom.exe`, `BUILD_DLC_CIA.bat`, `build_dlc_cia.ps1`, `MANIFEST_DLC.json`이 들어 있습니다. 필요한 경우 GitHub 배포에 이 ZIP도 함께 올려야 아래 CIA 생성 절차를 사용할 수 있습니다.
-
-1. `SMT4F_KO_DLC_Patch_v1.0.0.zip`을 압축 해제하고 내부 폴더 구성을 그대로 둡니다.
-2. `BUILD_DLC_CIA.bat`를 실행합니다. **기준 폴더** 질문에는 `HeaderNCCH1.bin`이 들어 있는, 수정하지 않은 `ExtractedDLC_Base/`의 전체 경로를 입력합니다.
-3. **출력 폴더** 질문에는 CIA를 저장할 폴더를 입력합니다. Enter만 누르면 배포 폴더의 `out/`을 사용합니다. 정상 완료 시 그 폴더에 `smt4a_dlc_ko.cia`가 만들어집니다. 이미 같은 이름의 CIA가 있으면 중단하므로 기존 파일을 먼저 별도 위치에 보관하세요.
-4. 생성된 CIA를 본인의 3DS 또는 에뮬레이터 환경에 설치한 뒤 DLC 장면을 확인합니다.
-
-**입력 폴더를 구분하세요.** 이 `BUILD_DLC_CIA.bat`는 Python 패치 결과인 `ExtractedDLC/`를 입력받아 다시 묶는 프로그램이 아닙니다. **원본 `ExtractedDLC_Base/`와 자기 ZIP 안의 `patch/`**를 읽고 해시를 검사한 뒤 CIA를 만듭니다. 따라서 DLC Python 패치는 패치된 추출 폴더가 필요할 때 쓰고, `SMT4F_KO_DLC_Patch_v1.0.0.zip`은 설치용 CIA가 필요할 때 **같은 원본 기준 폴더에서 별도로** 실행하면 됩니다. 두 방식을 순서대로 중복 적용할 필요는 없습니다.
-
-명령행을 선호한다면 패치 폴더에서 다음과 같이 실행할 수 있습니다. 경로는 본인 PC에 맞게 바꾸세요.
+PowerShell에서 경로를 직접 지정하려면 압축 해제한 DLC 패치 폴더로 이동해 다음처럼 실행할 수도 있습니다. 경로는 본인 PC에 맞게 바꾸세요.
 
 ```powershell
-py -3 apply_patch.py "D:\Games\ExtractedDLC_Base" "D:\Games\ExtractedDLC" --check
-py -3 apply_patch.py "D:\Games\ExtractedDLC_Base" "D:\Games\ExtractedDLC"
+.\BUILD_DLC_CIA.bat "D:\Games\ExtractedDLC_Base" "D:\Games\DLC_out"
 ```
 
-첫 줄의 `--check`는 기준 파일 호환성만 검사하고 결과 폴더를 만들지 않습니다. 둘째 줄은 실제 적용입니다. 결과 폴더가 이미 있으면 기본값으로 중단합니다. `--force`는 **지정한 결과 폴더를 통째로 삭제**하므로, 이름이 겹치면 다른 새 출력 경로를 사용하는 편이 안전합니다.
+빌드 스크립트는 `ExtractedDLC_Base/`의 **일부 변경되지 않은 파일**과 자기 ZIP의 `patch/`에 든 **한글화된 파일**을 조합합니다. `patch/`를 기준 폴더에 먼저 덮어쓰거나 다른 DLC 패치를 연달아 적용하지 마세요.
 
 ### 오류가 나면
 
-| 메시지 | 뜻과 조치 |
+| 표시되는 내용 | 확인할 곳 |
 | --- | --- |
-| `Missing baseline file` | 기준 추출 폴더에 필요한 파일이 없습니다. DLC 추출을 다시 확인하세요. |
-| `Baseline size mismatch` / `Baseline SHA-256 mismatch` | 지역판·버전·기존 수정 상태가 제작 기준과 다릅니다. 위 DLC 기준과 원본 추출 상태를 확인하세요. |
-| `Missing patch data` | `patch_data.zip`이 `apply_patch.py` 옆에 없습니다. ZIP을 다시 온전히 압축 해제하세요. |
-| `Output already exists` | 새 결과 폴더 이름을 선택하거나 기존 결과를 안전하게 백업한 후 다시 시도하세요. |
-| `Python 3 was not found` | Python 3을 설치하고 `py -3 --version` 또는 `python --version`을 확인하세요. |
+| `기준 폴더(ExtractedDLC_Base)를 찾을 수 없습니다` | 입력한 폴더 경로와 `HeaderNCCH1.bin` 존재 여부를 확인하세요. |
+| `파일이 없습니다` | DLC CIA의 `CE` 추출 결과가 완전한지, ZIP의 `patch/`와 `rebuild/`를 그대로 압축 해제했는지 확인하세요. |
+| `기준 파일이 다릅니다` | 지역판·DLC 버전 또는 추출 상태가 제작 기준과 다릅니다. 위 CIA SHA-256부터 다시 확인하세요. |
+| `패치 파일이 손상되었습니다` | ZIP을 다시 받아 온전히 압축 해제하세요. |
+| `출력 파일이 이미 있습니다` | 기존 CIA를 별도 위치에 보관하거나 다른 출력 폴더를 지정하세요. |
+| `3dstool 실패` / `makerom 실패` | `tools/`가 ZIP 안의 원래 위치에 있는지와 디스크 여유 공간을 확인하세요. |
 
-`ERROR:`가 나오면 적용 완료로 취급하지 마세요. 기준 폴더는 패처가 수정하지 않으므로 원인을 바로잡은 뒤 새 결과 경로로 재시도할 수 있습니다.
+`[오류]`가 표시되면 생성이 완료된 것으로 보지 마세요. 기준 추출 폴더는 빌드 스크립트가 직접 수정하지 않습니다.
 
 ## 마지막 확인
 
@@ -232,7 +215,7 @@ py -3 apply_patch.py "D:\Games\ExtractedDLC_Base" "D:\Games\ExtractedDLC"
 - [ ] 필요한 경우 본편 `.3ds`와 DLC `.cia`를 복호화한 뒤 SHA-256을 확인했다.
 - [ ] 본편의 기준이 북미판 UNDUB + Team Frost 2.0인지 확인했다.
 - [ ] `code.bin`과 `DecryptedExHeader.bin` 또는 `exheader.bin`을 함께 적용했다.
-- [ ] DLC가 필요하면 별도 DLC 패치의 `37/37` 완료 문구를 확인했다.
+- [ ] DLC가 필요하면 `SMT4F_KO_DLC_Patch_v1.0.0.zip`의 `BUILD_DLC_CIA.bat`로 `smt4a_dlc_ko.cia`를 만들고 완료 문구를 확인했다.
 - [ ] 재빌드 또는 SD 카드 복사 후 실제 게임에서 이야기·전투·메뉴·이름 입력과 사용하는 DLC 장면을 확인했다.
 
 배포 ZIP의 파일 구성과 정적 검증만으로 모든 게임 장면의 실제 표시를 보증할 수는 없습니다. 문제가 생기면 사용한 방식, 본편·DLC 기준 버전, 오류 문구, 화면 위치를 함께 기록하면 원인을 찾기 쉽습니다.
