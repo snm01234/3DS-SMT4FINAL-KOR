@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | `SMT4F_KO_FOR_REPACK_v1.0.0.zip` | 본편 게임을 직접 추출하여 다시 빌드할 때 | 재빌드에 넣을 본편 변경 파일 623개 |
 | `SMT4F_KO_LayeredFS_Luma_v1.0.0.zip` | Luma3DS의 게임 패칭으로 본편을 실행할 때 | SD 카드에 복사할 본편 변경 파일 623개 |
-| `SMT4F_KO_ExtractedDLC_PythonPatch_v1.0.0.zip` | 별도로 보유한 DLC를 추출해 패치할 때 | 패치된 DLC 추출 폴더. 설치용 CIA는 별도로 빌드해야 함 |
+| `SMT4F_KO_DLC_Patch_v1.0.0.zip` | 별도로 보유한 DLC를 추출해 패치할 때 | 패치된 DLC 추출 폴더. 설치용 CIA는 별도로 빌드해야 함 |
 
 **본편은 앞의 두 ZIP 중 하나만 선택**합니다. 둘은 같은 본편 변경분을 재빌드용과 Luma3DS용으로 포장한 것입니다. DLC를 사용하고 한글화하려면 세 번째 ZIP을 추가로 사용합니다. 본편 패치가 DLC를 자동으로 수정하지는 않습니다.
 
